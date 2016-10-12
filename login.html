@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="cs305/des.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<title>AMA LOGIN</title>
+</head>
+<body bgcolor="rgb(151,151,151)">
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    	$("#btnclear").click(function(){
+	              document.getElementById("txtbox1").value= "";
+    document.getElementById("txtbox2").value= "";
+   
+    });
+    $("#btnlogin").click(function(){
+    $(document).ready(function () {
+ 			$.getJSON('lime.json',function(data)
+		{
+			var af = data;
+			var  s = JSON.stringify(af);
+			var o = JSON.parse(s);
+
+      var result = '';
+      $.each(o, function (i, item){
+        result += 'username = ' + item.username + '<br/>';
+        result += 'passsword = ' + item.password + '<br/>';
+
+ var x = document.getElementById("txtbox1").value;
+	 var y = document.getElementById("txtbox2").value;
+    if ((x == null || x == "") && (y == null || y ==""))
+  {
+    $("#diverror").removeClass("hid");
+           document.getElementById("lblerror").style.color  = "red";
+    document.getElementById("lblerror").innerHTML = "No Username and Password";
+    $("#diverror").show();
+     $('#diverror').delay(2000).fadeOut();
+
+
+    return false;}
+  else if (x == null || x == "")
+  {
+    $("#lblerror").removeClass("hid");
+           document.getElementById("lblerror").style.color  = "red";
+    document.getElementById("lblerror").innerHTML = "No username";
+  $("#diverror").show();
+     $('#diverror').delay(2000).fadeOut();
+
+    return false;
+  }
+  else if (y == null || y == "")
+  {
+   $("#lblerror").removeClass("hid");
+           document.getElementById("lblerror").style.color  = "red";
+    document.getElementById("lblerror").innerHTML = "No Password";
+  $("#diverror").show();
+     $('#diverror').delay(2000).fadeOut();
+    return false;
+  }
+else if ((x != '' || x != null) && (y != '' || y != null)){
+    if (x == item.username && y == item.password){
+ 		window.document.location.href = 'home.html';
+ 
+    	return false;
+    }
+  else	if (x != item.username && y != item.password)
+  {
+  	$("#diverror").removeClass("hid");
+           document.getElementById("lblerror").style.color  = "red";
+    document.getElementById("lblerror").innerHTML = "Incorrect Username/Password";
+    $("#diverror").show();
+     $('#diverror').delay(2000).fadeOut();
+    return true;
+  }
+    
+  }
+
+      });
+      $('#try').html(result);	
+    });
+    });
+    });
+});
+</script>
+<center>
+<div id="login-form">
+<h1 align="center" style="color: white"> AMA Login System
+</h1>
+<table>
+<tr>
+<td><input type = "text" id ="txtbox1" placeholder="Username" >
+</td>
+</tr>
+<tr>
+<td><input type = "password" id ="txtbox2" placeholder="Password" >
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<input type = "button" id="btnlogin" value = "Submit"/>
+<input type = "button" id="btnclear" value = "Reset"/>
+</center>
+</td>
+</tr>
+</table>
+<div id = "diverror" class="hid"> <p id = "lblerror"></p> </div>
+
+<a href="register.html"> No Account Register a User </a>
+</div>
+</center>
+</body>
+</html>
