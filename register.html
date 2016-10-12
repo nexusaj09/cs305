@@ -30,7 +30,15 @@ function checkForm(form)
      $('#regerror').delay(2000).fadeOut();
              form.usernam.focus();
     return false;
-
+    }
+	if(form.usernam.value != "" && form.pas.value == "" || form.pasver.value == "") {
+  $("#regerror").removeClass("hid");
+           document.getElementById("regerror").style.color  = "red";
+  document.getElementById("regerror").innerHTML = "Error: Please check that you've entered and confirmed your password!";
+    $("#regerror").show();
+     $('#regerror').delay(2000).fadeOut();
+             form.usernam.focus();
+    return false;
     }
     re = /^\w+$/;
     if(!re.test(form.usernam.value)) {
